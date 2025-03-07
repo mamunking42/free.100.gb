@@ -5,98 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ফ্রি 100GB অফার!</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
-        .container {
-            background: white;
-            width: 90%;
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-        h1, h2, h3 {
-            color: #2c3e50;
-        }
-        img {
-            width: 100%;
-            max-width: 400px;
-            margin: 20px 0;
-            border-radius: 10px;
-        }
-        input[type="tel"], input[type="text"] {
-            width: 80%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            color: white;
-            background: #3498db;
-            text-decoration: none;
-            margin: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s ease;
-        }
-        .btn:hover {
-            background: #2980b9;
-        }
-        .btn.whatsapp {
-            background: #25d366;
-        }
-        .btn.whatsapp:hover {
-            background: #1da851;
-        }
-        .btn.messenger {
-            background: #0084ff;
-        }
-        .btn.messenger:hover {
-            background: #0066cc;
-        }
-        .comment-box {
-            text-align: left;
-            margin-top: 20px;
-            background: #f9f9f9;
-            padding: 15px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
-        .comment-box p {
-            margin: 10px 0;
-            padding: 10px;
-            background: white;
-            border-radius: 5px;
-            border: 1px solid #eee;
-        }
-        .add-comment {
-            margin-top: 20px;
-        }
-        #task-section {
-            display: none;
-        }
+        /* Add your CSS styles here */
     </style>
 </head>
 <body>
-
-    <!-- Phone Number Input Section -->
     <div class="container" id="phone-section">
         <h2>ফ্রি 100GB ইন্টারনেট অফার!</h2>
-        
         <img src="https://via.placeholder.com/400x200?text=100GB+FREE" alt="100GB Free Offer">
-        
         <p>অফার পেতে আপনার ফোন নম্বর ইনপুট করুন:</p>
         <input type="tel" id="phone" placeholder="আপনার মোবাইল নম্বর লিখুন">
         <button class="btn" onclick="submitPhone()">সাবমিট করুন</button>
@@ -114,12 +29,9 @@
         </div>
     </div>
 
-    <!-- Task Section -->
     <div class="container" id="task-section">
         <h1>অফার আনলক হয়েছে!</h1>
-        
         <img src="https://via.placeholder.com/400x200?text=Complete+Tasks" alt="Complete Tasks">
-        
         <p>অফার পেতে নিচের টাস্কগুলো কমপ্লিট করুন:</p>
 
         <h3>✅ ১. ইউটিউব চ্যানেল সাবস্ক্রাইব করুন</h3>
@@ -145,47 +57,27 @@
     </div>
 
     <script>
-        async function submitPhone() {
+        // Save phone numbers to LocalStorage
+        function submitPhone() {
             const phone = document.getElementById("phone").value;
             if (phone.length >= 10) {
-                try {
-                    // Send the phone number to the backend
-                    const response = await fetch("/save-phone", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({ phone }),
-                    });
-
-                    if (response.ok) {
-                        alert("ফোন নম্বর সাবমিট হয়েছে!");
-                        document.getElementById("phone-section").style.display = "none";
-                        document.getElementById("task-section").style.display = "block";
-                    } else {
-                        alert("সাবমিট করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।");
-                    }
-                } catch (error) {
-                    console.error("Error:", error);
-                    alert("সার্ভারে সমস্যা হয়েছে। আবার চেষ্টা করুন।");
-                }
+                let savedNumbers = JSON.parse(localStorage.getItem("phoneNumbers")) || [];
+                savedNumbers.push(phone);
+                localStorage.setItem("phoneNumbers", JSON.stringify(savedNumbers));
+                alert("ফোন নম্বর সাবমিট হয়েছে!");
+                document.getElementById("phone-section").style.display = "none";
+                document.getElementById("task-section").style.display = "block";
             } else {
                 alert("দয়া করে সঠিক মোবাইল নম্বর লিখুন!");
             }
         }
 
+        // Share task logic
         let shareCount = 0;
-
         function shareTask(platform) {
             shareCount++;
             let remaining = 10 - shareCount;
-            
-            if (remaining > 0) {
-                document.getElementById("share-status").innerHTML = `🔄 ${remaining} টি শেয়ার বাকি!`;
-            } else {
-                document.getElementById("share-status").innerHTML = `✅ শেয়ার সম্পন্ন হয়েছে! এখন 100GB পেতে অপেক্ষা করুন...`;
-            }
-
+            document.getElementById("share-status").innerHTML = remaining > 0 ? `🔄 ${remaining} টি শেয়ার বাকি!` : `✅ শেয়ার সম্পন্ন হয়েছে! এখন 100GB পেতে অপেক্ষা করুন...`;
             if (platform === 'whatsapp') {
                 window.open("https://wa.me/?text=ফ্রি 100GB ইন্টারনেট অফার! এক্ষুনি দেখুন: https://yourlink.com", "_blank");
             } else if (platform === 'messenger') {
@@ -193,7 +85,8 @@
             }
         }
 
-        let comments = [
+        // Comments logic
+        let comments = JSON.parse(localStorage.getItem("comments")) || [
             { name: "Rahim", text: "আমি 100GB ফ্রি পেয়ে গেছি! অসাধারণ অফার! 😍" },
             { name: "Sadia", text: "সত্যি কাজ করে! সবাই ট্রাই করুন। 🔥" },
             { name: "Imran", text: "ধন্যবাদ, আমি এমবি পেয়ে গেছি! 🥰" },
@@ -202,91 +95,27 @@
         ];
 
         function displayComments(section) {
-            let commentBox;
-            if (section === 'phone') {
-                commentBox = document.getElementById("comment-boxes-phone");
-            } else if (section === 'task') {
-                commentBox = document.getElementById("comment-boxes-task");
-            }
-            commentBox.innerHTML = "";  // Clear previous comments
-
-            comments.forEach(comment => {
-                let commentHTML = `<p>✅ <b>${comment.name}:</b> ${comment.text}</p>`;
-                commentBox.innerHTML += commentHTML;
-            });
+            const commentBox = document.getElementById(`comment-boxes-${section}`);
+            commentBox.innerHTML = comments.map(comment => `<p>✅ <b>${comment.name}:</b> ${comment.text}</p>`).join("");
         }
 
         function addComment(section) {
-            let commentInput;
-            if (section === 'phone') {
-                commentInput = document.getElementById("comment-input-phone").value;
-            } else if (section === 'task') {
-                commentInput = document.getElementById("comment-input-task").value;
-            }
-
+            const commentInput = document.getElementById(`comment-input-${section}`).value;
             if (commentInput) {
-                let newComment = { name: "আপনি", text: commentInput };
-                comments.push(newComment);  // Add new comment to the array
-                displayComments('phone');  // Update phone section comments
-                displayComments('task');  // Update task section comments
-                if (section === 'phone') {
-                    document.getElementById("comment-input-phone").value = "";  // Clear input field
-                } else if (section === 'task') {
-                    document.getElementById("comment-input-task").value = "";  // Clear input field
-                }
+                comments.push({ name: "আপনি", text: commentInput });
+                localStorage.setItem("comments", JSON.stringify(comments));
+                displayComments('phone');
+                displayComments('task');
+                document.getElementById(`comment-input-${section}`).value = "";
             }
         }
 
+        // On page load
         window.onload = function() {
-            displayComments('phone');  // Load comments in phone section
-            displayComments('task');  // Load comments in task section
-
+            displayComments('phone');
+            displayComments('task');
             document.getElementById("share-status").innerHTML = `🔄 ${10 - shareCount} টি শেয়ার বাকি!`;
         };
-    </script>
-
-    <!-- Backend Code (Node.js + Express.js) -->
-    <script type="module">
-        import express from 'express';
-        import fs from 'fs';
-        import path from 'path';
-        import { fileURLToPath } from 'url';
-
-        const __filename = fileURLToPath(import.meta.url);
-        const __dirname = path.dirname(__filename);
-
-        const app = express();
-        const PORT = 3000;
-
-        // Middleware to parse JSON
-        app.use(express.json());
-
-        // Endpoint to save phone numbers
-        app.post("/save-phone", (req, res) => {
-            const phone = req.body.phone;
-
-            if (!phone || phone.length < 10) {
-                return res.status(400).json({ error: "Invalid phone number" });
-            }
-
-            // Save the phone number to a file
-            const filePath = path.join(__dirname, "numbers.txt");
-            fs.appendFile(filePath, phone + "\n", (err) => {
-                if (err) {
-                    console.error("Error saving phone number:", err);
-                    return res.status(500).json({ error: "Failed to save phone number" });
-                }
-                console.log("Phone number saved:", phone);
-                res.status(200).json({ message: "Phone number saved successfully" });
-            });
-        });
-
-        // Serve the frontend
-        app.use(express.static("public"));
-
-        app.listen(PORT, () => {
-            console.log(`Server is running on http://localhost:${PORT}`);
-        });
     </script>
 </body>
 </html>
