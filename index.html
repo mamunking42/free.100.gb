@@ -5,33 +5,137 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ফ্রি 100GB অফার!</title>
     <style>
-        /* Add your CSS styles here */
+        /* ব্যাকগ্রাউন্ড আরও আকর্ষণীয় */
+        body {
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* কন্টেইনার ডিজাইন */
+        .container {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        /* হেডার ও টেক্সট ডিজাইন */
+        h1, h2, h3 {
+            color: #ff4757;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        p {
+            font-size: 18px;
+            color: #2c3e50;
+        }
+
+        /* ইমেজের বর্ডার ও শ্যাডো */
+        img {
+            width: 100%;
+            max-width: 400px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 5px solid #ff6b81;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* বাটন ডিজাইন */
+        .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            color: white;
+            background: linear-gradient(to right, #ff6a00, #ee0979);
+            text-decoration: none;
+            margin: 10px;
+            border-radius: 5px;
+            font-size: 18px;
+            transition: background 0.3s ease, transform 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn:hover {
+            background: linear-gradient(to right, #ee0979, #ff6a00);
+            transform: scale(1.05);
+        }
+
+        .btn.whatsapp {
+            background: #25d366;
+        }
+        .btn.whatsapp:hover {
+            background: #1da851;
+        }
+
+        .btn.messenger {
+            background: #0084ff;
+        }
+        .btn.messenger:hover {
+            background: #0066cc;
+        }
+
+        /* মন্তব্য সেকশন */
+        .comment-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .comment-box p {
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            border: 1px solid #eee;
+        }
+        .add-comment {
+            margin-top: 20px;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        #task-section {
+            display: none;
+        }
     </style>
 </head>
 <body>
-    <div class="container" id="phone-section">
-        <h2>ফ্রি 100GB ইন্টারনেট অফার!</h2>
-        <img src="https://via.placeholder.com/400x200?text=100GB+FREE" alt="100GB Free Offer">
-        <p>অফার পেতে আপনার ফোন নম্বর ইনপুট করুন:</p>
-        <input type="tel" id="phone" placeholder="আপনার মোবাইল নম্বর লিখুন">
-        <button class="btn" onclick="submitPhone()">সাবমিট করুন</button>
 
-        <!-- Comment Section in Phone Section -->
+    <!-- অফার সেকশন -->
+    <div class="container" id="welcome-section">
+        <h2>🎉 ফ্রি 100GB ইন্টারনেট অফার!</h2>
+        <img src="m.png" alt="100GB Free Offer">
+        <p>এই অফারটি পেতে নিচে আপনার ফোন নাম্বার দিন এবং "অফার আনলক করুন" বোতামে ক্লিক করুন।</p>
+        
+        <input type="text" id="phone-number" placeholder="আপনার ফোন নাম্বার দিন">
+        <button class="btn" onclick="unlockOffer()">অফার আনলক করুন</button>
+
         <h3>📢 ইউজার কমেন্টস</h3>
-        <div id="comment-boxes-phone" class="comment-box">
-            <!-- Dynamic comments will be loaded here -->
-        </div>
+        <div id="comment-boxes-welcome" class="comment-box"></div>
 
-        <!-- Add a comment -->
         <div class="add-comment">
-            <input type="text" id="comment-input-phone" placeholder="আপনার কমেন্ট লিখুন...">
-            <button class="btn" onclick="addComment('phone')">কমেন্ট করুন</button>
+            <input type="text" id="comment-input-welcome" placeholder="আপনার কমেন্ট লিখুন...">
+            <button class="btn" onclick="addComment('welcome')">কমেন্ট করুন</button>
         </div>
     </div>
 
+    <!-- টাস্ক সেকশন -->
     <div class="container" id="task-section">
-        <h1>অফার আনলক হয়েছে!</h1>
-        <img src="https://via.placeholder.com/400x200?text=Complete+Tasks" alt="Complete Tasks">
+        <h1>✅ অফার আনলক হয়েছে!</h1>
+        <img src="m.png">
         <p>অফার পেতে নিচের টাস্কগুলো কমপ্লিট করুন:</p>
 
         <h3>✅ ১. ইউটিউব চ্যানেল সাবস্ক্রাইব করুন</h3>
@@ -43,13 +147,9 @@
         <button class="btn whatsapp" onclick="shareTask('whatsapp')">WhatsApp-এ শেয়ার করুন</button>
         <button class="btn messenger" onclick="shareTask('messenger')">Messenger-এ শেয়ার করুন</button>
 
-        <!-- Comment Section in Task Section -->
         <h3>📢 ইউজার কমেন্টস</h3>
-        <div id="comment-boxes-task" class="comment-box">
-            <!-- Dynamic comments will be loaded here -->
-        </div>
+        <div id="comment-boxes-task" class="comment-box"></div>
 
-        <!-- Add a comment -->
         <div class="add-comment">
             <input type="text" id="comment-input-task" placeholder="আপনার কমেন্ট লিখুন...">
             <button class="btn" onclick="addComment('task')">কমেন্ট করুন</button>
@@ -57,65 +157,51 @@
     </div>
 
     <script>
-        // Save phone numbers to LocalStorage
-        function submitPhone() {
-            const phone = document.getElementById("phone").value;
-            if (phone.length >= 10) {
-                let savedNumbers = JSON.parse(localStorage.getItem("phoneNumbers")) || [];
-                savedNumbers.push(phone);
-                localStorage.setItem("phoneNumbers", JSON.stringify(savedNumbers));
-                alert("ফোন নম্বর সাবমিট হয়েছে!");
-                document.getElementById("phone-section").style.display = "none";
-                document.getElementById("task-section").style.display = "block";
-            } else {
-                alert("দয়া করে সঠিক মোবাইল নম্বর লিখুন!");
-            }
-        }
-
-        // Share task logic
-        let shareCount = 0;
-        function shareTask(platform) {
-            shareCount++;
-            let remaining = 10 - shareCount;
-            document.getElementById("share-status").innerHTML = remaining > 0 ? `🔄 ${remaining} টি শেয়ার বাকি!` : `✅ শেয়ার সম্পন্ন হয়েছে! এখন 100GB পেতে অপেক্ষা করুন...`;
-            if (platform === 'whatsapp') {
-                window.open("https://wa.me/?text=ফ্রি 100GB ইন্টারনেট অফার! এক্ষুনি দেখুন: https://yourlink.com", "_blank");
-            } else if (platform === 'messenger') {
-                window.open("https://www.messenger.com/", "_blank");
-            }
-        }
-
-        // Comments logic
-        let comments = JSON.parse(localStorage.getItem("comments")) || [
-            { name: "Rahim", text: "আমি 100GB ফ্রি পেয়ে গেছি! অসাধারণ অফার! 😍" },
-            { name: "Sadia", text: "সত্যি কাজ করে! সবাই ট্রাই করুন। 🔥" },
-            { name: "Imran", text: "ধন্যবাদ, আমি এমবি পেয়ে গেছি! 🥰" },
-            { name: "Ayesha", text: "আগে বিশ্বাস হয়নি, এখন বুঝলাম এটা আসল! ❤️" },
-            { name: "Kamal", text: "১০ জনকে শেয়ার করলাম, এখন এমবি পেলেই হয়! 😁" }
+        let commentsWelcome = [
+            { name: "Rahim", text: "আমি 100GB ফ্রি পেয়ে গেছি! অসাধারণ! 😍" },
+            { name: "Sadia", text: "সত্যি কাজ করে! 🔥" },
+            { name: "Mamun", text: "আমি পেয়েছি 100 জিবি "}
+            
+        ];
+        let commentsTask = [
+            { name: "Fahim", text: "অসাধারণ! আমার ১০০GB একদম ফ্রি পেয়েছি!💥"}
         ];
 
         function displayComments(section) {
-            const commentBox = document.getElementById(`comment-boxes-${section}`);
-            commentBox.innerHTML = comments.map(comment => `<p>✅ <b>${comment.name}:</b> ${comment.text}</p>`).join("");
+            let commentBox = document.getElementById(`comment-boxes-${section}`);
+            commentBox.innerHTML = "";
+            (section === 'welcome' ? commentsWelcome : commentsTask).forEach(comment => {
+                commentBox.innerHTML += `<p>✅ <b>${comment.name}:</b> ${comment.text}</p>`;
+            });
         }
 
         function addComment(section) {
-            const commentInput = document.getElementById(`comment-input-${section}`).value;
-            if (commentInput) {
-                comments.push({ name: "আপনি", text: commentInput });
-                localStorage.setItem("comments", JSON.stringify(comments));
-                displayComments('phone');
-                displayComments('task');
-                document.getElementById(`comment-input-${section}`).value = "";
+            let input = document.getElementById(`comment-input-${section}`);
+            if (input.value.trim()) {
+                (section === 'welcome' ? commentsWelcome : commentsTask).push({ name: "আপনি", text: input.value });
+                displayComments(section);
+                input.value = "";
             }
         }
 
-        // On page load
+        function unlockOffer() {
+            if (document.getElementById("phone-number").value) {
+                document.getElementById("welcome-section").style.display = "none";
+                document.getElementById("task-section").style.display = "block";
+            } else {
+                alert("আপনার ফোন নাম্বার দিন!");
+            }
+        }
+
+        function shareTask() {
+            document.getElementById("share-status").innerHTML = "✅ শেয়ার সম্পন্ন হয়েছে!";
+        }
+
         window.onload = function() {
-            displayComments('phone');
+            displayComments('welcome');
             displayComments('task');
-            document.getElementById("share-status").innerHTML = `🔄 ${10 - shareCount} টি শেয়ার বাকি!`;
         };
     </script>
+
 </body>
 </html>
